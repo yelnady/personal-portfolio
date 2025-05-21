@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import "./globals.css";
 import "remixicon/fonts/remixicon.css";
 import { Space_Grotesk } from 'next/font/google'
+import { MouseEffect } from "@/components/MouseEffect";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
         className={`${spaceGrotesk.className} ${inter.variable} antialiased min-h-screen flex flex-col`}
         suppressHydrationWarning={true}
       >
+        <MouseEffect />
         <Navbar />
         <div className="relative flex-1">
           <main className="relative z-10">

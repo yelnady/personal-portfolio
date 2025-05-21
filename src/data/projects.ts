@@ -48,7 +48,6 @@ export const projects: Project[] = [
     featured: true,
     status: "in-progress",
     startDate: "2024-01",
-    image: "https://images.unsplash.com/photo-1517694712201-5f8f2afd3acd?w=800&auto=format&fit=crop&q=80"
   },
   {
     title: "MLOps Pipeline Framework",

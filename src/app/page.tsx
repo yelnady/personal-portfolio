@@ -5,8 +5,6 @@ import { projects } from '@/data/projects';
 import { motion } from 'framer-motion';
 import { ProjectCard } from '@/components/ProjectCard';
 import FeatureBoxes from '@/components/FeatureBoxes'
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Hero from '@/components/Hero';
 
@@ -40,11 +38,8 @@ const Section = ({
   </section>
 );
 
-
-
+// SectionHeading component
 import { SectionHeading } from '@/components/SectionHeading';
-
-
 
 // Professional Journey Component
 const ProfessionalJourney = () => {
@@ -136,7 +131,7 @@ const ProfessionalJourney = () => {
   );
 };
 
-// Refined Projects Section with improved card design
+// Projects Section with improved card design
 const Projects = () => {
   // Filter featured projects or take first 4
   const featuredProjects = projects.filter(p => p.featured).slice(0, 4) || projects.slice(0, 4);
@@ -222,34 +217,7 @@ const Projects = () => {
     </Section>
   );
 };
-// SkillsBar Component
-const SkillsBar = ({
-  skills,
-  className = ''
-}: {
-  skills: string[];
-  className?: string;
-}) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className={`${className}`}
-  >
-    <div className="flex flex-wrap justify-center gap-3">
-      {skills.map((skill) => (
-        <span
-          key={skill}
-          className="px-4 py-2 rounded-full text-sm bg-white/80 text-pink-600 border border-pink-200 shadow-sm hover:bg-white hover:shadow-md transition-all duration-200"
-        >
-          {skill}
-        </span>
-      ))}
-    </div>
-  </motion.div>
-);
-
+    
 // Skills component
 const Skills = () => {
   const skillCategories = [
@@ -288,13 +256,7 @@ const Skills = () => {
             Skills &amp; Technologies
           </SectionHeading>
 
-          {/* Skills Bar */}
-          <div className="mb-12">
-            <h3 className="text-center text-lg font-medium text-gray-600 mb-4">
-              My Technical Stack
-            </h3>
-            <SkillsBar skills={resume.skills} />
-          </div>
+        
 
           {/* Skills by Category */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -376,8 +338,6 @@ const Contact = () => (
     </Container>
   </Section>
 );
-
-
 
 
 export default function Home() {

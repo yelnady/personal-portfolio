@@ -41,7 +41,7 @@ export interface Resume {
   github?: string;
   twitter?: string;
   instagram?: string;
-  
+
 }
 
 export const resume: Resume = {
@@ -49,7 +49,7 @@ export const resume: Resume = {
   title: "Data Scientist",
   summary: "I'm passionate about crafting experiences that are engaging, accessible, and user-centric.",
   location: "Virginia, USA",
-  email: "yofa.elnady@gmail.com", 
+  email: "yofa.elnady@gmail.com",
   bio: `Data Scientist with expertise in AI/ML, web development, and healthcare technology. Passionate about creating impactful solutions and sharing knowledge through teaching and mentoring.
 
 I specialize in building intelligent systems that solve real-world problems. My experience spans from developing AI-powered applications to conducting research in healthcare technology. I believe in the power of technology to make a positive impact on society.
@@ -179,5 +179,9 @@ When I'm not coding, I enjoy teaching and mentoring others, contributing to open
     }
   ],
 
-  skills: ["Python", "React", "TypeScript", "AI/ML"]
+  skills: ["Python", "AI/ML", "Fine‑Tuning & Distillation", "Infrastructure", "MLOps", "Generative AI & LLMs", "Agentic AI",
+    "LangChain", "Prompt Engineering", "NLP", "PyTorch/TensorFlow", "scikit‑learn", "n8n", 
+    "Git & Code Review", "Docker & Kubernetes", "Azure/AWS/GCP", "SQL & NoSQL", "REST/FastAPI", "Stakeholder Engagement", "Automation Workflows",
+    "Communication", "Statistical Analysis", "AI Web Apps", "Web Scraping", "Deep Neural Networks",
+    "Data Visualization", "Problem-solving", "Self-learning", "Data Mining", "Classification and Clustering Algorithms", "Data Analysis"]
 };

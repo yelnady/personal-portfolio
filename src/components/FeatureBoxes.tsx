@@ -1,7 +1,6 @@
-import { resume, Experience } from '@/data/resume'; // Removed Education as it wasn't used in this snippet
-// import { projects } from '@/data/projects'; // projects wasn't used in this snippet
+import { resume, Experience } from '@/data/resume';
 import { motion } from 'framer-motion';
-import { socials, Social } from '@/data/socials'; // Assuming socials.ts is in @/data/socials
+import { socials, Social } from '@/data/socials';
 
 const Container = ({
   children,
@@ -84,17 +83,16 @@ const socialIconMap: Record<string, { icon: JSX.Element; bgColor: string; name: 
   },
   bookly: {
     name: "Bookly",
-    icon: ( // Simple calendar/booking icon
+    icon: ( 
       <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
         <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM7 12h5v5H7v-5z"/>
       </svg>
     ),
-    bgColor: "bg-yellow-500 hover:bg-yellow-400", // Example color
+    bgColor: "bg-yellow-500 hover:bg-yellow-400",
   },
-  // Add more icons here if needed
   default: {
     name: "Link",
-    icon: ( // Generic link icon
+    icon: (
       <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
         <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
       </svg>
@@ -103,6 +101,24 @@ const socialIconMap: Record<string, { icon: JSX.Element; bgColor: string; name: 
   }
 };
 
+// Navigation functions
+const handleNavigation = (section: string) => {
+  // For sections that exist on the same page
+  const sectionId = `#${section}`;
+  const element = document.querySelector(sectionId);
+  
+  if (element) {
+    element.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } else {
+    // If section doesn't exist, you could navigate to a different page
+    // For example: window.location.href = `/portfolio/${section}`;
+    window.location.href = `/${section}`;
+    console.log(`Navigate to ${section} section`);
+  }
+};
 
 const FeatureBoxes = () => {
   const container = {
@@ -122,7 +138,7 @@ const FeatureBoxes = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6, // Keep original duration or adjust as preferred
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1]
       }
     }
@@ -138,20 +154,35 @@ const FeatureBoxes = () => {
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Experience Card - Purple */}
+          {/* Experience Card - Purple - Clickable */}
           <motion.div
             variants={item}
-            className="group relative overflow-hidden rounded-3xl bg-purple-400 p-8 text-right text-white h-full flex flex-col"
+            className="group relative overflow-hidden rounded-3xl bg-purple-400 p-8 text-right text-white h-full flex flex-col cursor-pointer transition-all duration-300"
             whileHover={{
               y: -5,
               scale: 1.02,
               transition: { type: 'spring', stiffness: 300, damping: 15 }
             }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleNavigation('experience')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleNavigation('experience');
+              }
+            }}
+            aria-label="View Experience section"
           >
-            <div className="flex-1 flex flex-col items-end">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div className="flex-1 flex flex-col items-end relative z-10">
               <div className="mb-6">
                 <p className="text-sm font-medium">MY PORTFOLIO</p>
                 <h3 className="text-4xl font-bold">Experience</h3>
+                <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-sm bg-white bg-opacity-20 px-3 py-1 rounded-full">Click to explore →</span>
+                </div>
               </div>
               <div className="mt-6 w-full bg-white rounded-lg p-4 text-left text-gray-800 overflow-y-auto max-h-64 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <div className="w-full bg-blue-700 h-4 mb-6 rounded-t-lg"></div>
@@ -192,20 +223,35 @@ const FeatureBoxes = () => {
             </div>
           </motion.div>
 
-          {/* Projects Card - Teal */}
+          {/* Projects Card - Teal - Clickable */}
           <motion.div
             variants={item}
-            className="group relative overflow-hidden rounded-3xl bg-teal-300 p-8 text-right text-white h-full flex flex-col"
-             whileHover={{
+            className="group relative overflow-hidden rounded-3xl bg-teal-300 p-8 text-right text-white h-full flex flex-col cursor-pointer transition-all duration-300"
+            whileHover={{
               y: -5,
               scale: 1.02,
               transition: { type: 'spring', stiffness: 300, damping: 15 }
             }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleNavigation('projects')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleNavigation('projects');
+              }
+            }}
+            aria-label="View Projects section"
           >
-             <div className="flex-1 flex flex-col items-end">
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-400 to-teal-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div className="flex-1 flex flex-col items-end relative z-10">
               <div className="mb-6">
                 <p className="text-sm font-medium">MY PORTFOLIO</p>
                 <h3 className="text-4xl font-bold">Projects</h3>
+                <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-sm bg-white bg-opacity-20 px-3 py-1 rounded-full">Click to explore →</span>
+                </div>
               </div>
               <div className="mt-6 w-full bg-white rounded-lg p-4 text-left text-gray-800 overflow-y-auto max-h-64 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <div className="w-full bg-blue-700 h-4 mb-6 rounded-t-lg"></div>
@@ -239,20 +285,35 @@ const FeatureBoxes = () => {
             </div>
           </motion.div>
 
-          {/* Notes Card - Peach */}
+          {/* Notes Card - Peach - Clickable */}
           <motion.div
             variants={item}
-            className="group relative overflow-hidden rounded-3xl bg-orange-200 p-8 text-right text-gray-800 h-full flex flex-col"
+            className="group relative overflow-hidden rounded-3xl bg-orange-200 p-8 text-right text-gray-800 h-full flex flex-col cursor-pointer transition-all duration-300"
             whileHover={{
               y: -5,
               scale: 1.02,
               transition: { type: 'spring', stiffness: 300, damping: 15 }
             }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleNavigation('about')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleNavigation('about');
+              }
+            }}
+            aria-label="View About/Notes section"
           >
-            <div className="flex-1 flex flex-col items-end">
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-300 to-orange-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div className="flex-1 flex flex-col items-end relative z-10">
               <div className="mb-6">
                 <p className="text-sm font-medium">MY PORTFOLIO</p>
                 <h3 className="text-4xl font-bold">Notes</h3>
+                <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-sm bg-white bg-opacity-30 px-3 py-1 rounded-full text-gray-700">Click to explore →</span>
+                </div>
               </div>
               <div className="mt-6 w-full bg-white rounded-lg p-4 text-left overflow-y-auto max-h-64 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <div className="bg-gray-800 rounded-t-lg p-2 flex items-center">
@@ -284,20 +345,35 @@ const FeatureBoxes = () => {
             </div>
           </motion.div>
 
-          {/* Contact Me Card - Light Blue */}
+          {/* Contact Me Card - Light Blue - Already has clickable elements */}
           <motion.div
             variants={item}
-            className="group relative overflow-hidden rounded-3xl bg-blue-200 p-8 text-right text-gray-800 h-full flex flex-col"
+            className="group relative overflow-hidden rounded-3xl bg-blue-200 p-8 text-right text-gray-800 h-full flex flex-col cursor-pointer transition-all duration-300"
             whileHover={{
               y: -5,
               scale: 1.02,
               transition: { type: 'spring', stiffness: 300, damping: 15 }
             }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleNavigation('contact')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleNavigation('contact');
+              }
+            }}
+            aria-label="View Contact section"
           >
-            <div className="flex-1 flex flex-col items-end">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-300 to-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div className="flex-1 flex flex-col items-end relative z-10">
               <div className="mb-6">
                 <p className="text-sm font-medium">MY PORTFOLIO</p>
                 <h3 className="text-4xl font-bold">Contact Me</h3>
+                <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-sm bg-white bg-opacity-30 px-3 py-1 rounded-full text-gray-700">Click to explore →</span>
+                </div>
               </div>
               
               <div className="mt-6 w-full bg-white rounded-lg p-4">
@@ -311,7 +387,6 @@ const FeatureBoxes = () => {
                       const iconDetails = socialIconMap[social.icon.toLowerCase()] || socialIconMap.default;
                       const isMailLink = social.url.startsWith('mailto:');
                       const isWhatsAppLink = social.url.startsWith('https://wa.me/');
-
                       return (
                         <a
                           key={social.platform}
@@ -321,6 +396,7 @@ const FeatureBoxes = () => {
                           aria-label={`Contact ${resume.name} via ${iconDetails.name}`}
                           title={iconDetails.name}
                           className={`w-10 h-10 rounded-full flex items-center justify-center text-white transition-all duration-300 ease-in-out transform hover:scale-110 ${iconDetails.bgColor}`}
+                          onClick={(e) => e.stopPropagation()} // Prevent parent click handler
                         >
                           {iconDetails.icon}
                         </a>
@@ -336,6 +412,7 @@ const FeatureBoxes = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block bg-blue-500 text-white text-sm font-medium py-3 px-4 rounded-lg text-center hover:bg-blue-600 transition-colors cursor-pointer"
+                      onClick={(e) => e.stopPropagation()} // Prevent parent click handler
                     >
                       Book Consultation
                     </a>
@@ -349,4 +426,5 @@ const FeatureBoxes = () => {
     </Section>
   );
 };
+
 export default FeatureBoxes;
