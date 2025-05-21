@@ -768,23 +768,53 @@ const FeatureBoxes = () => {
             }}
           >
             <div className="flex-1">
-              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <span className="text-xs font-medium bg-white/20 px-3 py-1 rounded-full">Latest Projects</span>
               </div>
-              <h3 className="text-2xl font-bold mb-3">Projects</h3>
-              <p className="text-purple-100 mb-6">Explore my latest work and personal projects I've built.</p>
+              <h3 className="text-2xl font-bold mb-6">Featured Work</h3>
+              
+              <div className="space-y-5 mb-6">
+                {projects.slice(0, 2).map((project, index) => (
+                  <motion.div 
+                    key={index}
+                    className="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 hover:bg-white/15 transition-all duration-300 cursor-pointer"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                  >
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-white mr-3"></div>
+                      <div>
+                        <h4 className="font-semibold text-white">{project.title}</h4>
+                        <p className="text-sm text-purple-100 line-clamp-2">{project.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-            <a 
-              href="#projects" 
-              className="inline-flex items-center text-white font-medium group-hover:translate-x-1 duration-300 text-sm"
-            >
-              View Projects
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
+            
+            <div className="mt-auto">
+              <div className="flex items-center justify-between text-sm text-purple-100 mb-2">
+                <span>View all projects</span>
+                <span>{projects.length}+</span>
+              </div>
+              <div className="w-full bg-white/20 rounded-full h-1.5 mb-4">
+                <div className="bg-white h-1.5 rounded-full" style={{ width: '100%' }}></div>
+              </div>
+              <a 
+                href="#projects" 
+                className="inline-flex items-center justify-center w-full py-2 px-4 bg-white/10 hover:bg-white/20 rounded-lg text-white font-medium transition-all duration-300 text-sm group"
+              >
+                Explore All Projects
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
           </motion.div>
 
           {/* Contact Card - Pink */}
