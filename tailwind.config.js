@@ -8,6 +8,12 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    // Custom utility to hide scrollbar but keep functionality
+    extend: {
+      // ... existing extends ...
+      scrollbar: ['hidden'],
+    },
+    // ... rest of theme config
     container: {
       center: true,
       padding: "2rem",

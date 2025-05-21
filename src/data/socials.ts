@@ -7,22 +7,33 @@ export interface Social {
 export const socials: Social[] = [
   {
     platform: "GitHub",
-    url: "https://github.com/yourusername",
+    url: "https://github.com/yelnady",
     icon: "github"
   },
   {
     platform: "LinkedIn",
-    url: "https://linkedin.com/in/yourusername",
+    url: "https://linkedin.com/in/yelnady",
     icon: "linkedin"
   },
-  {
-    platform: "Twitter",
-    url: "https://twitter.com/yourusername",
-    icon: "twitter"
-  },
+
   {
     platform: "Email",
-    url: "mailto:contact@example.com",
+    url: "mailto:yofa.elnady@gmail.com",
     icon: "mail"
+  },
+  {
+    platform: "Youtube",
+    url: "https://www.youtube.com/@yelnady",
+    icon: "youtube"
+  },
+  {
+    platform: "WhatsApp",
+    url: "https://wa.me/5409983384",
+    icon: "whatsapp"
+  },
+  {
+    platform: "Bookly",
+    url: "https://bookly.com/yelnady",
+    icon: "bookly"
   }
 ];

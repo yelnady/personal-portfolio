@@ -33,7 +33,11 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <Navbar />
-        <main className="flex-1 pt-16">{children}</main>
+        <div className="relative flex-1">
+          <main className="relative z-10">
+            {children}
+          </main>
+        </div>
         <Footer />
       </body>
     </html>
