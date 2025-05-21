@@ -12,7 +12,6 @@ export interface Project {
   startDate: string;
   endDate?: string;
   link?: string;
-  
 }
 
 export const projects: Project[] = [

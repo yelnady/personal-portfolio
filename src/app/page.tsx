@@ -1,85 +1,13 @@
 'use client';
 
 import { resume } from '@/data/resume';
+import { projects } from '@/data/projects';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-type Star = {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  delay: number;
-};
-
-interface Project {
-  title: string;
-  description: string;
-  technologies: string[];
-  link: string;
-  image: string;
-  github?: string;
-  category?: string;
-  status?: string;
-}
-
-const projects: Project[] = [
-  {
-    title: "Portfolio Website",
-    description: "Modern portfolio built with Next.js and Tailwind CSS",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    link: "https://github.com/yelnady/portfolio",
-    image: "/images/portfolio.png"
-  },
-  // Add more projects here
-];
-
-// Improved Floating Stars Component with better performance
-const FloatingStars = () => {
-  const [stars, setStars] = useState<Array<{id: number; x: number; y: number; size: number; delay: number}>>([]);
-
-  useEffect(() => {
-    // Generate fewer stars for better performance
-    const newStars = Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2 + 1, // Smaller stars
-      delay: Math.random() * 3
-    }));
-    setStars(newStars);
-  }, []);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {stars.map((star) => (
-        <motion.div
-          key={star.id}
-          className="absolute rounded-full bg-white/60"
-          style={{
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            left: `${star.x}%`,
-            top: `${star.y}%`,
-          }}
-          animate={{
-            opacity: [0.2, 0.7, 0.2],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            delay: star.delay,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+// Imported Project interface from @/data/projects
 
 // Container component for consistent layout
 const Container = ({ 
@@ -111,164 +39,11 @@ const Section = ({
   </section>
 );
 
-// Refined Hero Section
-const Hero = () => {
-  // Animation variants for staggered animations
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-  
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6 }
-    }
-  };
-
-  return (
-    <Section className="min-h-[90vh] flex items-center justify-center bg-slate-900 relative overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03]"></div>
-      </div>
-      
-      <Container className="z-10 relative">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center space-y-8"
-        >
-          <motion.div variants={itemVariants}>
-            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-              <span className="h-2 w-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
-              <span className="text-sm font-medium text-blue-300">Data Scientist & AI Engineer</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white">
-              <span className="block">Data Science & AI</span>
-              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">Driving Business Value</span>
-            </h1>
-          </motion.div>
-          
-          <motion.p 
-            variants={itemVariants}
-            className="text-lg md:text-xl font-light text-slate-300 max-w-3xl mx-auto leading-relaxed"
-          >
-            I transform complex data into actionable insights using advanced analytics and machine learning. 
-            With expertise in Python, TensorFlow, and data visualization, I build intelligent systems that 
-            solve real-world business challenges and drive innovation.
-          </motion.p>
-          
-          <motion.div 
-            variants={itemVariants} 
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6"
-          >
-            <Link 
-              href="#work" 
-              className="inline-flex items-center justify-center px-6 py-3 text-base md:text-lg font-medium rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all"
-            >
-              Explore Projects
-              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </Link>
-            <Link 
-              href="#contact" 
-              className="inline-flex items-center justify-center px-6 py-3 text-base md:text-lg font-medium rounded-full bg-slate-800 text-white hover:bg-slate-700 transition-all border border-slate-700"
-            >
-              View Resume
-              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </motion.div>
-          
-          <motion.div 
-            variants={itemVariants}
-            className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-          >
-            {[
-              { label: 'Machine Learning', value: '5+ Years' },
-              { label: 'Data Analysis', value: '7+ Years' },
-              { label: 'AI Solutions', value: '30+' },
-              { label: 'Client Projects', value: '20+' },
-              { label: 'Technologies', value: '15+' },
-              { label: 'Experience', value: '4+ Years' },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-slate-400">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </Container>
-    </Section>
-  );
-};
-
-// Refined About Section
-const About = () => {
-  const fadeInVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.7 }
-    }
-  };
-
-  return (
-    <Section id="about" className="bg-gradient-to-b from-slate-50 to-white">
-      <Container>
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInVariants}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
-            About Me
-          </h2>
-          
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg leading-relaxed text-slate-700">
-              {resume.bio}
-            </p>
-            
-            <div className="mt-8 bg-white rounded-xl p-6 shadow-sm border border-slate-100">
-              <h3 className="text-xl font-semibold mb-4 text-slate-800">What I'm currently working on:</h3>
-              <ul className="space-y-3">
-                {resume.currentFocus.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3 text-slate-700">
-                    <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800/10 text-slate-700">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.div>
-      </Container>
-    </Section>
-  );
-};
-
+ 
 // Refined Projects Section with improved card design
 const Projects = () => {
-  const featuredProjects = projects.slice(0, 4);
+  // Filter featured projects or take first 4
+  const featuredProjects = projects.filter(p => p.featured).slice(0, 4) || projects.slice(0, 4);
   
   // More subtle and professional gradient backgrounds
   const tileColors = [
@@ -277,6 +52,19 @@ const Projects = () => {
     'bg-gradient-to-br from-cyan-50 to-blue-50 border-l-4 border-cyan-400',
     'bg-gradient-to-br from-emerald-50 to-teal-50 border-l-4 border-emerald-400'
   ];
+  
+  // Map status to display text and styles
+  const getStatusBadge = (status: string) => {
+    switch(status) {
+      case 'in-progress':
+        return { text: 'In Progress', className: 'bg-amber-100 text-amber-700' };
+      case 'planned':
+        return { text: 'Planned', className: 'bg-blue-100 text-blue-700' };
+      case 'completed':
+      default:
+        return { text: 'Completed', className: 'bg-green-100 text-green-700' };
+    }
+  };
 
   return (
     <Section id="work" className="bg-gradient-to-b from-white to-slate-50">
@@ -289,7 +77,7 @@ const Projects = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
-            Selected Work
+            Featured Work
           </h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             A collection of my recent projects and case studies
@@ -308,15 +96,15 @@ const Projects = () => {
             >
               <div className="p-6 flex flex-col h-full">
                 <div className="mb-auto">
-                  <div className="flex items-center gap-2 mb-3">
-                    {project.category && (
-                      <span className="text-sm font-medium px-2.5 py-1 rounded-full bg-slate-800/10 text-slate-700">
-                        {project.category}
+                  <div className="flex flex-wrap items-center gap-2 mb-3">
+                    {project.category?.map((cat, i) => (
+                      <span key={i} className="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800/10 text-slate-700">
+                        {cat}
                       </span>
-                    )}
-                    {project.status === 'in-progress' && (
-                      <span className="text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 font-medium">
-                        In Progress
+                    ))}
+                    {project.status && (
+                      <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${getStatusBadge(project.status).className}`}>
+                        {getStatusBadge(project.status).text}
                       </span>
                     )}
                   </div>
@@ -355,13 +143,13 @@ const Projects = () => {
                       </svg>
                     </a>
                     )}
-                    {project.link && (
+                    {(project.link || project.demo) && (
                       <a 
-                        href={project.link}
+                        href={project.link || project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-1.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
-                        aria-label={`Visit ${project.title} website`}
+                        aria-label={`Visit ${project.title} ${project.link ? 'website' : 'demo'}`}
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -531,156 +319,7 @@ const Skills = () => {
   );
 };
 
-// Footer component - New addition
-const Footer = () => (
-  <footer className="bg-slate-900 text-white py-12">
-    <Container>
-      <div className="flex flex-col md:flex-row justify-between items-center">
-        <div className="mb-6 md:mb-0">
-          <h3 className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 to-cyan-300">
-            {resume.name}
-          </h3>
-          <p className="text-slate-400 mt-1">{resume.title}</p>
-        </div>
-        
-        <div className="flex space-x-6">
-          {resume.github && (
-            <a 
-              href={resume.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="GitHub"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-            </a>
-          )}
-          
-          {resume.linkedin && (
-            <a 
-              href={resume.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="LinkedIn"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </a>
-          )}
-          
-          {resume.twitter && (
-            <a 
-              href={resume.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="Twitter"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-              </svg>
-            </a>
-          )}
-        </div>
-      </div>
-      
-      <div className="mt-8 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm">
-        <p>&copy; {new Date().getFullYear()} {resume.name}. All rights reserved.</p>
-      </div>
-    </Container>
-  </footer>
-);
-
-// Main Component
-// Experience Card Component
-const ExperienceCard = () => (
-  <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-    <h3 className="text-xl font-bold text-gray-900 mb-4">Experience</h3>
-    <div className="space-y-4">
-      {resume.experience.slice(0, 2).map((exp, index) => (
-        <div key={index} className="border-l-2 border-green-500 pl-4">
-          <h4 className="font-semibold text-gray-900">{exp.title}</h4>
-          <p className="text-gray-600">{exp.company} • {exp.startDate} - {exp.endDate}</p>
-          <p className="text-sm text-gray-500 mt-1">{exp.highlights[0]}</p>
-        </div>
-      ))}
-      <button className="text-green-600 hover:text-green-800 text-sm font-medium mt-2">
-        View all experience →
-      </button>
-    </div>
-  </div>
-);
-
-// Notes Card Component
-const NotesCard = () => (
-  <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-    <h3 className="text-xl font-bold text-gray-900 mb-4">Latest Notes</h3>
-    <div className="space-y-4">
-      <div className="border-l-2 border-blue-500 pl-4">
-        <h4 className="font-semibold text-gray-900">Understanding React Server Components</h4>
-        <p className="text-sm text-gray-500 mt-1">A deep dive into the new React architecture</p>
-      </div>
-      <div className="border-l-2 border-blue-500 pl-4">
-        <h4 className="font-semibold text-gray-900">Tailwind CSS Best Practices</h4>
-        <p className="text-sm text-gray-500 mt-1">How to write maintainable Tailwind code</p>
-      </div>
-      <button className="text-blue-600 hover:text-blue-800 text-sm font-medium mt-2">
-        Read all notes →
-      </button>
-    </div>
-  </div>
-);
-
-// Projects Card Component
-const ProjectsCard = () => (
-  <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-    <h3 className="text-xl font-bold text-gray-900 mb-4">Projects</h3>
-    {projects.slice(0, 3).map((project) => (
-      <div key={project.title} className="border-l-2 border-purple-500 pl-4">
-        <h4 className="font-semibold text-gray-900">{project.title}</h4>
-        <p className="text-sm text-gray-500 mt-1">{project.description.substring(0, 60)}...</p>
-      </div>
-    ))}
-    <button className="text-purple-600 hover:text-purple-800 text-sm font-medium mt-2">
-      View all projects →
-    </button>
-  </div>
-);
-
-// Connect Card Component
-const ConnectCard = () => (
-  <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-    <h3 className="text-xl font-bold text-gray-900 mb-4">Connect</h3>
-    <p className="text-gray-600 mb-4">Let's build something amazing together!</p>
-    <div className="flex space-x-4">
-      <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" 
-         className="text-gray-500 hover:text-gray-900 transition-colors">
-        <span className="sr-only">GitHub</span>
-        <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.699 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-        </svg>
-      </a>
-      <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" 
-         className="text-gray-500 hover:text-gray-900 transition-colors">
-        <span className="sr-only">LinkedIn</span>
-        <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-      </a>
-      <a href="mailto:your.email@example.com" className="text-gray-500 hover:text-gray-900 transition-colors">
-        <span className="sr-only">Email</span>
-        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      </a>
-    </div>
-  </div>
-);
-
+ 
 // Feature Boxes Component
 const FeatureBoxes = () => {
   const container = {
@@ -700,7 +339,7 @@ const FeatureBoxes = () => {
       y: 0, 
       opacity: 1,
       transition: {
-        duration: 0.5,
+        duration: 3,
         ease: [0.16, 1, 0.3, 1]
       }
     }
@@ -935,7 +574,9 @@ export default function Home() {
   return (
     <main className="bg-white text-gray-800">
       {/* Hero Section */}
-<section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+        </div>
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1078,8 +719,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
+      <Projects />
+      <Skills />
+      <Contact />
     </main>
   );
 }

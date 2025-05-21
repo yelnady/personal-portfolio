@@ -17,8 +17,8 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Yusuf - Software Engineer & AI Specialist',
-  description: 'Software engineer specializing in AI/ML and web development. Creating impactful solutions through technology.',
+  title: 'Yusuf - Data Scientist & AI Specialist',
+  description: 'Data Scientist specializing in AI/ML and web development. Creating impactful solutions through technology.',
 };
 
 export default function RootLayout({

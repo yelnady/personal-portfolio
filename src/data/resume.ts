@@ -46,11 +46,11 @@ export interface Resume {
 
 export const resume: Resume = {
   name: "Yusuf",
-  title: "Software Engineer",
+  title: "Data Scientist",
   summary: "I'm passionate about crafting experiences that are engaging, accessible, and user-centric.",
   location: "Virginia, USA",
-  email: "contact@example.com", // Replace with your email
-  bio: `Software engineer with expertise in AI/ML, web development, and healthcare technology. Passionate about creating impactful solutions and sharing knowledge through teaching and mentoring.
+  email: "yofa.elnady@gmail.com", // Replace with your email
+  bio: `Data Scientist with expertise in AI/ML, web development, and healthcare technology. Passionate about creating impactful solutions and sharing knowledge through teaching and mentoring.
 
 I specialize in building intelligent systems that solve real-world problems. My experience spans from developing AI-powered applications to conducting research in healthcare technology. I believe in the power of technology to make a positive impact on society.
 
