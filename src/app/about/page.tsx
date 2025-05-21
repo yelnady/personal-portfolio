@@ -53,7 +53,7 @@ export default function AboutPage() {
 
       <section className="container mx-auto px-4 py-16">
         <SectionHeading 
-          title="Work Timeline"
+          children="Work Timeline"
           description="My professional journey and key milestones."
           className="mb-12"
         />
