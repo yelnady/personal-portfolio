@@ -29,15 +29,72 @@ const SkillsBar = ({
 const Hero = () => {
   return (
     <>
-      {/* Background blobs */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50">
-          {/* Subtle grid pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        </div>
-        {/* Decorative blobs */}
-        <div className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-        <div className="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+      {/* Animated Gradient Background */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        {/* Base gradient layer */}
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-purple-50"></div>
+        
+        {/* Animated gradient overlay */}
+        <motion.div 
+          className="absolute inset-0 opacity-50"
+          initial={{ backgroundPosition: '0% 50%' }}
+          animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            ease: 'linear' 
+          }}
+          style={{
+            background: 'linear-gradient(45deg, rgba(255, 182, 193, 0.2), rgba(255, 255, 255, 0.1), rgba(221, 160, 221, 0.2))',
+            backgroundSize: '300% 300%',
+          }}
+        />
+        
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E")',
+          }}
+        />
+        
+        {/* Animated blobs */}
+        <motion.div 
+          className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40"
+          animate={{
+            scale: [1, 1.1, 1],
+            x: ['0%', '5%', '0%'],
+            y: ['0%', '5%', '0%'],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'easeInOut',
+          }}
+        />
+        
+        <motion.div 
+          className="absolute -bottom-1/4 -left-1/4 w-2/3 h-2/3 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40"
+          animate={{
+            scale: [1, 1.2, 1],
+            x: ['0%', '-5%', '0%'],
+            y: ['0%', '-5%', '0%'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'easeInOut',
+            delay: 2
+          }}
+        />
+        
+        {/* Subtle noise texture */}
+        <div className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%\' height=\'100%\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")',
+          }}
+        />
       </div>
 
       {/* Glass overlay */}
@@ -71,10 +128,10 @@ const Hero = () => {
                   </svg>
                 </div>
               </div>
-              <p className="text-2xl md:text-3xl text-gray-600 mt-6 mb-2">
+              <p className="text-2xl md:text-3xl text-gray-800 mt-6 mb-2 font-medium">
                 Hi, I'm {resume.name}
               </p>
-              <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 font-medium">
+              <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-8 font-medium">
                 {resume.title} specializing in {resume.currentFocus[0]}
               </p>
               <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12">
@@ -93,5 +150,7 @@ const Hero = () => {
     </>
   );
 };
+
+
 
 export default Hero;

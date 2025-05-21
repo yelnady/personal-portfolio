@@ -42,12 +42,7 @@ const Section = ({
 
 
 
-// Reusable Section Heading Component
-const SectionHeading = ({ children, className = '' }: { children: React.ReactNode, className?: string }) => (
-  <h2 className={`text-3xl md:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600 ${className}`}>
-    {children}
-  </h2>
-);
+import { SectionHeading } from '@/components/SectionHeading';
 
 
 

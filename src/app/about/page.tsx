@@ -2,14 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { resume } from '@/data/resume';
-import { SectionHeader } from '@/components/section-header';
+import SectionHeading from '@/components/SectionHeading';
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen">
       <section className="container mx-auto px-4 pt-24 pb-16">
-        <SectionHeader
-          title="About Me"
+        <SectionHeading
+          children="About Me"
           description="Learn more about my background, experience, and what drives me."
           className="mb-12"
         />
@@ -52,7 +52,7 @@ export default function AboutPage() {
       </section>
 
       <section className="container mx-auto px-4 py-16">
-        <SectionHeader
+        <SectionHeading 
           title="Work Timeline"
           description="My professional journey and key milestones."
           className="mb-12"
