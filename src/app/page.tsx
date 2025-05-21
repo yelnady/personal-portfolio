@@ -134,9 +134,13 @@ const Hero = () => {
   };
 
   return (
-    <Section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-950 via-slate-900 to-blue-950">
-      <FloatingStars />
-      <Container className="z-10">
+    <Section className="min-h-[90vh] flex items-center justify-center bg-slate-900 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.03]"></div>
+      </div>
+      
+      <Container className="z-10 relative">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -144,29 +148,66 @@ const Hero = () => {
           className="text-center space-y-8"
         >
           <motion.div variants={itemVariants}>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 to-cyan-300">
-              <span className="block">Hi.</span>
-              <span className="block">I'm {resume.name.split(' ')[0]}.</span>
+            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
+              <span className="h-2 w-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
+              <span className="text-sm font-medium text-blue-300">Data Scientist & AI Engineer</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white">
+              <span className="block">Data Science & AI</span>
+              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">Driving Business Value</span>
             </h1>
           </motion.div>
           
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-xl font-light text-white/80 max-w-2xl mx-auto"
+            className="text-lg md:text-xl font-light text-slate-300 max-w-3xl mx-auto leading-relaxed"
           >
-            {resume.bio}
+            I transform complex data into actionable insights using advanced analytics and machine learning. 
+            With expertise in Python, TensorFlow, and data visualization, I build intelligent systems that 
+            solve real-world business challenges and drive innovation.
           </motion.p>
           
-          <motion.div variants={itemVariants} className="pt-8">
+          <motion.div 
+            variants={itemVariants} 
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6"
+          >
             <Link 
               href="#work" 
-              className="inline-flex items-center justify-center px-6 py-3 text-base md:text-lg font-medium rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all hover:scale-105 border border-white/20"
+              className="inline-flex items-center justify-center px-6 py-3 text-base md:text-lg font-medium rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all"
             >
-              View My Work
+              Explore Projects
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </Link>
+            <Link 
+              href="#contact" 
+              className="inline-flex items-center justify-center px-6 py-3 text-base md:text-lg font-medium rounded-full bg-slate-800 text-white hover:bg-slate-700 transition-all border border-slate-700"
+            >
+              View Resume
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </motion.div>
+          
+          <motion.div 
+            variants={itemVariants}
+            className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+          >
+            {[
+              { label: 'Machine Learning', value: '5+ Years' },
+              { label: 'Data Analysis', value: '7+ Years' },
+              { label: 'AI Solutions', value: '30+' },
+              { label: 'Client Projects', value: '20+' },
+              { label: 'Technologies', value: '15+' },
+              { label: 'Experience', value: '4+ Years' },
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+                <div className="text-sm text-slate-400">{stat.label}</div>
+              </div>
+            ))}
           </motion.div>
         </motion.div>
       </Container>
@@ -666,126 +707,192 @@ const FeatureBoxes = () => {
   };
 
   return (
-    <Section id="features" className="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-slate-800">
+    <Section id="features" className="pt-0 pb-20 md:pt-0 md:pb-32 bg-white -mt-20 relative z-10">
       <Container>
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
         >
           {/* Experience Card */}
+          {/* Experience Card - Blue */}
           <motion.div 
             variants={item}
-            className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 p-0.5 backdrop-blur-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-500 p-8 text-white h-full flex flex-col"
+            whileHover={{
+              y: -5,
+              scale: 1.02,
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+              transition: { 
+                type: 'spring',
+                stiffness: 300,
+                damping: 15
+              }
+            }}
           >
-            <div className="h-full bg-slate-800/50 rounded-2xl p-6 transition-all duration-300 group-hover:bg-slate-800/70">
-              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-blue-500/20 text-blue-400 mb-4 transition-colors group-hover:bg-blue-500/30">
+            <div className="flex-1">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Experience</h3>
-              <p className="text-slate-300 mb-4">Discover my professional journey and expertise in the tech industry.</p>
-              <a 
-                href="#experience" 
-                className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors group-hover:translate-x-1 duration-300"
-              >
-                View Experience
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
+              <h3 className="text-2xl font-bold mb-3">Experience</h3>
+              <p className="text-blue-100 mb-6">Discover my professional journey and expertise in the tech industry.</p>
             </div>
+            <a 
+              href="#experience" 
+              className="inline-flex items-center text-white font-medium group-hover:translate-x-1 duration-300 text-sm"
+            >
+              View Experience
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
           </motion.div>
 
-          {/* Projects Card */}
+          {/* Projects Card - Purple */}
           <motion.div 
             variants={item}
-            className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-0.5 backdrop-blur-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-600 to-purple-500 p-8 text-white h-full flex flex-col"
+            whileHover={{
+              y: -5,
+              scale: 1.02,
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+              transition: { 
+                type: 'spring',
+                stiffness: 300,
+                damping: 15
+              }
+            }}
           >
-            <div className="h-full bg-slate-800/50 rounded-2xl p-6 transition-all duration-300 group-hover:bg-slate-800/70">
-              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-purple-500/20 text-purple-400 mb-4 transition-colors group-hover:bg-purple-500/30">
+            <div className="flex-1">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Projects</h3>
-              <p className="text-slate-300 mb-4">Explore my latest work and personal projects I've built.</p>
-              <a 
-                href="#projects" 
-                className="inline-flex items-center text-purple-400 hover:text-purple-300 font-medium transition-colors group-hover:translate-x-1 duration-300"
-              >
-                View Projects
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
+              <h3 className="text-2xl font-bold mb-3">Projects</h3>
+              <p className="text-purple-100 mb-6">Explore my latest work and personal projects I've built.</p>
             </div>
+            <a 
+              href="#projects" 
+              className="inline-flex items-center text-white font-medium group-hover:translate-x-1 duration-300 text-sm"
+            >
+              View Projects
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
           </motion.div>
 
-          {/* Contact & Consultation Card */}
+          {/* Contact Card - Pink */}
           <motion.div 
             variants={item}
-            className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-0.5 backdrop-blur-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-pink-500 to-rose-500 p-8 text-white h-full flex flex-col"
+            whileHover={{
+              y: -5,
+              scale: 1.02,
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+              transition: { 
+                type: 'spring',
+                stiffness: 300,
+                damping: 15
+              }
+            }}
           >
-            <div className="h-full bg-slate-800/50 rounded-2xl p-6 transition-all duration-300 group-hover:bg-slate-800/70">
-              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-500/20 text-emerald-400 mb-4 transition-colors group-hover:bg-emerald-500/30">
+            <div className="flex-1">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Get in Touch</h3>
-              <p className="text-slate-300 mb-4">Ready to discuss your project? Let's talk about how I can help.</p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a 
-                  href="#contact" 
-                  className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 transition-colors"
-                >
-                  Contact Me
-                </a>
-                <a 
-                  href="#consultation" 
-                  className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-emerald-400/30 rounded-lg text-sm font-medium text-emerald-400 hover:bg-emerald-500/10 transition-colors"
-                >
-                  Book Consultation
-                </a>
+              <h3 className="text-2xl font-bold mb-3">Connect With Me</h3>
+              <p className="text-pink-100 mb-6">Let's collaborate or just say hi! I'm always open to new opportunities.</p>
+              
+              <div className="grid grid-cols-4 gap-4 mb-6">
+                {[
+                  { name: 'GitHub', icon: 'M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z', url: 'https://github.com/yourusername' },
+                  { name: 'LinkedIn', icon: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z', url: 'https://linkedin.com/in/yourusername' },
+                  { name: 'Twitter', icon: 'M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z', url: 'https://twitter.com/yourusername' },
+                  { name: 'Email', icon: 'M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z', url: 'mailto:your.email@example.com' },
+                ].map((social, index) => (
+                  <motion.a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                    whileHover={{ 
+                      y: -5,
+                      scale: 1.1,
+                      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)'
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    title={social.name}
+                  >
+                    <svg 
+                      className="w-5 h-5 text-white" 
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d={social.icon} />
+                    </svg>
+                  </motion.a>
+                ))}
               </div>
+              
+              <a 
+                href="#contact" 
+                className="block w-full text-center px-4 py-3 rounded-lg text-sm font-medium bg-white/20 hover:bg-white/30 transition-colors"
+              >
+                Send Me a Message
+              </a>
             </div>
           </motion.div>
 
-          {/* Notes Card */}
+          {/* Notes Card - Teal */}
           <motion.div 
             variants={item}
-            className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 p-0.5 backdrop-blur-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-500 to-cyan-500 p-8 text-white h-full flex flex-col"
+            whileHover={{
+              y: -5,
+              scale: 1.02,
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+              transition: { 
+                type: 'spring',
+                stiffness: 300,
+                damping: 15
+              }
+            }}
           >
-            <div className="h-full bg-slate-800/50 rounded-2xl p-6 transition-all duration-300 group-hover:bg-slate-800/70">
-              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-amber-500/20 text-amber-400 mb-4 transition-colors group-hover:bg-amber-500/30">
+            <div className="flex-1">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Notes & Articles</h3>
-              <p className="text-slate-300 mb-4">Read my latest thoughts on development, design, and technology.</p>
-              <div className="space-y-3">
-                <a href="#" className="block text-amber-400 hover:text-amber-300 transition-colors group/note">
-                  <div className="flex items-center justify-between">
-                    <span className="group-hover/note:underline">React 18 New Features</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 opacity-0 group-hover/note:opacity-100 transform -translate-x-1 group-hover/note:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </a>
-                <a href="#" className="block text-amber-400 hover:text-amber-300 transition-colors group/note">
-                  <div className="flex items-center justify-between">
-                    <span className="group-hover/note:underline">UI/UX Design Principles</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 opacity-0 group-hover/note:opacity-100 transform -translate-x-1 group-hover/note:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </a>
-              </div>
+              <h3 className="text-2xl font-bold mb-3">Notes & Articles</h3>
+              <p className="text-teal-100 mb-6">Read my latest thoughts on development, design, and technology.</p>
+            </div>
+            <div className="space-y-3">
+              <a href="#" className="block group/note">
+                <div className="flex items-center justify-between py-2 border-b border-teal-400/30">
+                  <span className="text-teal-50 group-hover/note:text-white">React 18 New Features</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 opacity-0 group-hover/note:opacity-100 transform -translate-x-1 group-hover/note:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+              <a href="#" className="block group/note">
+                <div className="flex items-center justify-between py-2 border-b border-teal-400/30">
+                  <span className="text-teal-50 group-hover/note:text-white">UI/UX Design Principles</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 opacity-0 group-hover/note:opacity-100 transform -translate-x-1 group-hover/note:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
             </div>
           </motion.div>
         </motion.div>
@@ -796,20 +903,37 @@ const FeatureBoxes = () => {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-emerald-950 via-slate-900 to-blue-950 text-white">
-      {/* Hero Section with Gradient Animation */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-transparent to-blue-500/20 animate-gradient"></div>
-        <div className="max-w-7xl mx-auto text-center relative z-10">
+    <main className="bg-white text-gray-800">
+      {/* Hero Section */}
+<section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 to-blue-300 mb-6">
-              Hi, I'm {resume.name}
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
+            <div className="relative inline-block mb-8">
+              {/* Star decorations */}
+              <div className="absolute -top-6 -left-8 text-yellow-400">
+                <svg className="w-8 h-8 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+              </div>
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-rose-500 leading-tight">
+                {resume.name.split(' ').map((name, i) => (
+                  <span key={i} className="block">{name}</span>
+                ))}
+              </h1>
+              <div className="absolute -bottom-6 -right-8 text-yellow-400 transform rotate-12">
+                <svg className="w-8 h-8 animate-pulse" style={{animationDelay: '0.5s'}} fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+              </div>
+            </div>
+            <p className="text-2xl md:text-3xl text-gray-600 mt-6 mb-2">
+              Hi, I'm {resume.name.split(' ')[0]}
+            </p>
+            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 font-medium">
               {resume.title} specializing in {resume.currentFocus[0]}
             </p>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12">
@@ -827,7 +951,7 @@ export default function Home() {
             {resume.skills.map((skill, index) => (
               <span 
                 key={skill}
-                className="px-4 py-2 rounded-full text-sm bg-white/5 text-emerald-300 border border-emerald-300/20"
+                className="px-4 py-2 rounded-full text-sm bg-white/80 text-pink-600 border border-pink-200 shadow-sm"
               >
                 {skill}
               </span>
@@ -840,45 +964,87 @@ export default function Home() {
       <FeatureBoxes />
 
       {/* Experience Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <motion.h2 
+          <motion.div 
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-3xl md:text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 to-blue-300"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            Experience
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {resume.experience.map((exp, index) => (
-              <motion.div
-                key={exp.company}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm p-8 border border-white/10 hover:border-white/20 transition-all"
-              >
-                <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full bg-gradient-to-br from-emerald-500/20 to-blue-500/20 opacity-50 transition-transform group-hover:scale-150"></div>
-                <span className="text-sm font-medium text-emerald-300">{exp.company}</span>
-                <h2 className="mt-2 text-2xl font-bold text-white">{exp.position}</h2>
-                <p className="text-gray-400 mt-2">{exp.startDate} - {exp.endDate}</p>
-                <ul className="mt-4 space-y-2">
-                  {exp.highlights.map((highlight, i) => (
-                    <li key={i} className="text-gray-300 flex items-start">
-                      <span className="mr-2 mt-1 text-emerald-400">▹</span>
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {exp.technologies.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 rounded-full text-sm bg-white/5 text-emerald-300 border border-emerald-300/20">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
+              Professional Journey
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              My work experience and career progression in the tech industry
+            </p>
+          </motion.div>
+
+          <div className="space-y-12 max-w-4xl mx-auto">
+            {resume.experience.map((exp, index) => {
+              // Different colors for each card
+              const colors = [
+                'from-blue-500 to-blue-600',
+                'from-purple-500 to-purple-600',
+                'from-rose-500 to-rose-600',
+                'from-emerald-500 to-emerald-600'
+              ];
+              const colorClass = colors[index % colors.length];
+              
+              return (
+                <motion.div
+                  key={exp.company}
+                  className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${colorClass} p-0.5`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <div className="bg-white rounded-[15px] p-8 h-full">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                      <div className="mb-4 md:mb-0">
+                        <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium mb-3 bg-gradient-to-r from-blue-100 to-blue-50 text-blue-800">
+                          {exp.startDate} - {exp.endDate}
+                        </div>
+                        <h3 className="text-2xl font-bold text-slate-900">{exp.position}</h3>
+                        <p className="text-lg text-slate-600">{exp.company}</p>
+                      </div>
+                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div className="mb-6 space-y-3">
+                      <h4 className="text-sm font-semibold text-slate-900 uppercase tracking-wider">Key Achievements</h4>
+                      <ul className="space-y-3">
+                        {exp.highlights.map((highlight, i) => (
+                          <li key={i} className="flex items-start">
+                            <span className="flex-shrink-0 w-1.5 h-1.5 mt-2.5 rounded-full bg-blue-500 mr-3"></span>
+                            <span className="text-slate-700">{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    {exp.technologies && exp.technologies.length > 0 && (
+                      <div className="pt-4 border-t border-slate-100">
+                        <h4 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Technologies Used</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.technologies.map((tech, i) => (
+                            <span key={i} className="px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
