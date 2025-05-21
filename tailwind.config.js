@@ -22,6 +22,18 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        peach: {
+          50: '#fff5f1',
+          100: '#ffe6dd',
+          200: '#ffd0bc',
+          300: '#ffb090',
+          400: '#ff8a61',
+          500: '#ff6937',
+          600: '#ff4d1c',
+          700: '#e63a0d',
+          800: '#ba2f0a',
+          900: '#982a0c',
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

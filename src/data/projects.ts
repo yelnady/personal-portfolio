@@ -11,6 +11,8 @@ export interface Project {
   status: 'completed' | 'in-progress' | 'planned';
   startDate: string;
   endDate?: string;
+  link?: string;
+  
 }
 
 export const projects: Project[] = [

@@ -37,6 +37,11 @@ export interface Resume {
   experience: Experience[];
   mission?: string;
   skills: string[];
+  linkedin?: string;
+  github?: string;
+  twitter?: string;
+  instagram?: string;
+  
 }
 
 export const resume: Resume = {
