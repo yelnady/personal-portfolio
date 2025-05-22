@@ -7,6 +7,8 @@ import { ProjectCard } from '@/components/ProjectCard';
 import FeatureBoxes from '@/components/FeatureBoxes'
 import Link from 'next/link';
 import Hero from '@/components/Hero';
+import { socials } from '@/data/socials';
+import { SectionHeading } from '@/components/SectionHeading';
 
 // Container component for consistent layout
 const Container = ({
@@ -39,97 +41,6 @@ const Section = ({
 );
 
 // SectionHeading component
-import { SectionHeading } from '@/components/SectionHeading';
-
-// Professional Journey Component
-const ProfessionalJourney = () => {
-  return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <SectionHeading className="md:text-5xl mb-4">
-            Professional Journey
-          </SectionHeading>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            My work experience and career progression in the tech industry
-          </p>
-        </motion.div>
-
-        <div className="space-y-12 max-w-4xl mx-auto">
-          {resume.experience.map((exp, index) => {
-            // Different colors for each card
-            const colors = [
-              'from-blue-500 to-blue-600',
-              'from-purple-500 to-purple-600',
-              'from-rose-500 to-rose-600',
-              'from-emerald-500 to-emerald-600'
-            ];
-            const colorClass = colors[index % colors.length];
-
-            return (
-              <motion.div
-                key={exp.company}
-                className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${colorClass} p-0.5`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className="bg-white rounded-[15px] p-8 h-full">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                    <div className="mb-4 md:mb-0">
-                      <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium mb-3 bg-gradient-to-r from-blue-100 to-blue-50 text-blue-800">
-                        {exp.startDate} - {exp.endDate}
-                      </div>
-                      <h3 className="text-2xl font-bold text-slate-900">{exp.position}</h3>
-                      <p className="text-lg text-slate-600">{exp.company}</p>
-                    </div>
-                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-blue-600">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div className="mb-6 space-y-3">
-                    <h4 className="text-sm font-semibold text-slate-900 uppercase tracking-wider">Key Achievements</h4>
-                    <ul className="space-y-3">
-                      {exp.highlights.map((highlight, i) => (
-                        <li key={i} className="flex items-start">
-                          <span className="flex-shrink-0 w-1.5 h-1.5 mt-2.5 rounded-full bg-blue-500 mr-3"></span>
-                          <span className="text-slate-700">{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {exp.technologies && exp.technologies.length > 0 && (
-                    <div className="pt-4 border-t border-slate-100">
-                      <h4 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Technologies Used</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech, i) => (
-                          <span key={i} className="px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 // Projects Section with improved card design
 const Projects = () => {
@@ -222,16 +133,12 @@ const Projects = () => {
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Frontend",
-      skills: resume.skills.filter(skill =>
-        ["React", "Next.js", "CSS", "HTML", "JavaScript", "TypeScript"].includes(skill)
-      )
+      title: "Technologies & Libraries",
+      skills: resume.technologies
     },
     {
-      title: "Backend",
-      skills: resume.skills.filter(skill =>
-        ["Node.js", "Express", "Django", "Python", "SQL", "MongoDB"].includes(skill)
-      )
+      title: "MLOps",
+      skills: resume.mlOps
     },
     {
       title: "Tools & Others",
@@ -252,7 +159,7 @@ const Skills = () => {
           transition={{ duration: 0.6 }}
           className="space-y-12"
         >
-          <SectionHeading>
+          <SectionHeading  className="md:text-5xl mb-4">
             Skills &amp; Technologies
           </SectionHeading>
 
@@ -273,7 +180,7 @@ const Skills = () => {
                   {category.title}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map(skill => (
+                  {category.skills?.map(skill => (
                     <span
                       key={skill}
                       className="px-3 py-1.5 bg-white text-slate-700 rounded-lg text-sm border border-slate-200 hover:bg-slate-50 transition-colors"
@@ -306,8 +213,7 @@ const Contact = () => (
           Get In Touch
         </SectionHeading>
         <p className="text-lg text-slate-600 mb-8">
-          Interested in working together? Feel free to reach out for collaborations or just a friendly chat.
-        </p>
+        I'm always happy to connect with others in the field for knowledge sharing, speaking engagements, or light advisory conversations. Feel free to reach out — I’d love to hear from you.</p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
@@ -319,10 +225,9 @@ const Contact = () => (
             </svg>
             Email Me
           </a>
-
-          {resume.linkedin && (
+          {socials.linkedin && (
             <a
-              href={resume.linkedin}
+              href={socials.linkedin.url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-slate-800 hover:bg-slate-100 border border-slate-200 transition-colors"
@@ -346,7 +251,6 @@ export default function Home() {
       <Hero />
       <div className="relative z-0 backdrop-blur-sm">
         <FeatureBoxes />
-        <ProfessionalJourney />
         <Projects />
         <Skills />
         <Contact />

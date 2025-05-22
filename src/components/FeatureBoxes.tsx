@@ -1,6 +1,6 @@
-import { resume, Experience } from '@/data/resume';
+import { resume, Experience } from '@/data/resume'; // Ensure resume data structure matches usage
 import { motion } from 'framer-motion';
-import { socials, Social } from '@/data/socials';
+import { socials, Social } from '@/data/socials'; // socials is an object, Social is the type for its values
 
 const Container = ({
   children,
@@ -54,7 +54,7 @@ const socialIconMap: Record<string, { icon: JSX.Element; bgColor: string; name: 
     ),
     bgColor: "bg-blue-700 hover:bg-blue-600",
   },
-  mail: {
+  mail: { // Changed from "email" to "mail" to match socials.ts key if that was the intent, or ensure socials.ts uses "email"
     name: "Email",
     icon: (
       <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
@@ -83,7 +83,7 @@ const socialIconMap: Record<string, { icon: JSX.Element; bgColor: string; name: 
   },
   bookly: {
     name: "Bookly",
-    icon: ( 
+    icon: (
       <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
         <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM7 12h5v5H7v-5z"/>
       </svg>
@@ -103,20 +103,17 @@ const socialIconMap: Record<string, { icon: JSX.Element; bgColor: string; name: 
 
 // Navigation functions
 const handleNavigation = (section: string) => {
-  // For sections that exist on the same page
   const sectionId = `#${section}`;
   const element = document.querySelector(sectionId);
-  
+
   if (element) {
-    element.scrollIntoView({ 
+    element.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
   } else {
-    // If section doesn't exist, you could navigate to a different page
-    // For example: window.location.href = `/portfolio/${section}`;
     window.location.href = `/${section}`;
-    console.log(`Navigate to ${section} section`);
+    // console.log(`Maps to ${section} section`); // Uncomment for debugging if needed
   }
 };
 
@@ -154,7 +151,7 @@ const FeatureBoxes = () => {
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Experience Card - Purple - Clickable */}
+          {/* Experience Card */}
           <motion.div
             variants={item}
             className="group relative overflow-hidden rounded-3xl bg-purple-400 p-8 text-right text-white h-full flex flex-col cursor-pointer transition-all duration-300"
@@ -185,7 +182,7 @@ const FeatureBoxes = () => {
                 </div>
               </div>
               <div className="mt-6 w-full bg-white rounded-lg p-4 text-left text-gray-800 overflow-y-auto max-h-64 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <div className="w-full bg-blue-700 h-4 mb-6 rounded-t-lg"></div>
+                <div className="w-full bg-blue-700 h-4 mb-6 rounded-t-lg"></div> {/* Decorative element */}
                 <div className="space-y-6">
                   {resume.experience.map((exp: Experience, index: number) => (
                     <div key={index} className="bg-white border border-gray-200 rounded p-3 shadow-sm">
@@ -199,23 +196,27 @@ const FeatureBoxes = () => {
                       </div>
                       <h4 className="font-bold text-gray-900">{exp.company}</h4>
                       <p className="text-xs text-gray-500 mb-2">{exp.location}</p>
-                      <div className="mt-2">
-                        <h5 className="text-xs font-medium text-gray-700 mb-1">Highlights:</h5>
-                        <ul className="text-xs list-disc pl-4 space-y-1">
-                          {exp.highlights.map((highlight, hIndex) => (
-                            <li key={hIndex} className="text-gray-600">{highlight}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="mt-2">
-                        <div className="flex flex-wrap gap-1 mt-2">
-                          {exp.technologies.map((tech, tIndex) => (
-                            <span key={tIndex} className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600">
-                              {tech}
-                            </span>
-                          ))}
+                      {exp.highlights && exp.highlights.length > 0 && (
+                        <div className="mt-2">
+                          <h5 className="text-xs font-medium text-gray-700 mb-1">Highlights:</h5>
+                          <ul className="text-xs list-disc pl-4 space-y-1">
+                            {exp.highlights.map((highlight, hIndex) => (
+                              <li key={hIndex} className="text-gray-600">{highlight}</li>
+                            ))}
+                          </ul>
                         </div>
-                      </div>
+                      )}
+                      {exp.technologies && exp.technologies.length > 0 && (
+                        <div className="mt-2">
+                          <div className="flex flex-wrap gap-1 mt-2">
+                            {exp.technologies.map((tech, tIndex) => (
+                              <span key={tIndex} className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -223,7 +224,7 @@ const FeatureBoxes = () => {
             </div>
           </motion.div>
 
-          {/* Projects Card - Teal - Clickable */}
+          {/* Projects Card */}
           <motion.div
             variants={item}
             className="group relative overflow-hidden rounded-3xl bg-teal-300 p-8 text-right text-white h-full flex flex-col cursor-pointer transition-all duration-300"
@@ -254,8 +255,8 @@ const FeatureBoxes = () => {
                 </div>
               </div>
               <div className="mt-6 w-full bg-white rounded-lg p-4 text-left text-gray-800 overflow-y-auto max-h-64 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <div className="w-full bg-blue-700 h-4 mb-6 rounded-t-lg"></div>
-                <div className="flex justify-between items-center mb-4">
+                <div className="w-full bg-blue-700 h-4 mb-6 rounded-t-lg"></div> {/* Decorative element */}
+                <div className="flex justify-between items-center mb-4"> {/* Decorative filter/view all */}
                   <div className="h-4 w-4 bg-gray-200 rounded-full"></div>
                   <div className="flex gap-2">
                     <div className="px-4 py-1 rounded bg-gray-100 text-xs text-gray-600">Filter</div>
@@ -264,28 +265,33 @@ const FeatureBoxes = () => {
                     </div>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div className="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded mb-3">Current Focus</div>
-                  <div className="space-y-3">
-                    {resume.currentFocus.map((focus, index) => (
-                      <div key={index} className="bg-white border border-gray-200 rounded p-3 shadow-sm">
-                        <h4 className="text-gray-800 text-sm font-medium mb-2">{focus}</h4>
-                        <div className="flex flex-wrap gap-1 mt-2">
-                          {resume.skills.slice(0, 2).map((skill, idx) => (
-                            <span key={idx} className="text-xs bg-teal-50 text-teal-600 px-2 py-1 rounded">
-                              {skill}
-                            </span>
-                          ))}
+                {resume.currentFocus && resume.currentFocus.length > 0 && (
+                    <div className="mt-4">
+                    <div className="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded mb-3">Current Focus</div>
+                    <div className="space-y-3">
+                        {resume.currentFocus.map((focus, index) => (
+                        <div key={index} className="bg-white border border-gray-200 rounded p-3 shadow-sm">
+                            <h4 className="text-gray-800 text-sm font-medium mb-1">{focus}</h4>
+                            {/* Example: Show first 2 skills, ensure resume.skills exists */}
+                            {resume.skills && resume.skills.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-1">
+                                {resume.skills.slice(0, 2).map((skill, idx) => (
+                                <span key={idx} className="text-xs bg-teal-50 text-teal-600 px-2 py-1 rounded">
+                                    {skill}
+                                </span>
+                                ))}
+                            </div>
+                            )}
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                        ))}
+                    </div>
+                    </div>
+                )}
               </div>
             </div>
           </motion.div>
 
-          {/* Notes Card - Peach - Clickable */}
+          {/* Notes Card */}
           <motion.div
             variants={item}
             className="group relative overflow-hidden rounded-3xl bg-orange-200 p-8 text-right text-gray-800 h-full flex flex-col cursor-pointer transition-all duration-300"
@@ -295,13 +301,13 @@ const FeatureBoxes = () => {
               transition: { type: 'spring', stiffness: 300, damping: 15 }
             }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => handleNavigation('about')}
+            onClick={() => handleNavigation('about')} // Assuming 'Notes' content relates to 'About' or a 'Notes' section
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                handleNavigation('about');
+                handleNavigation('about'); // Change 'about' to 'notes' if you have a /notes page or #notes section
               }
             }}
             aria-label="View About/Notes section"
@@ -316,7 +322,7 @@ const FeatureBoxes = () => {
                 </div>
               </div>
               <div className="mt-6 w-full bg-white rounded-lg p-4 text-left overflow-y-auto max-h-64 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <div className="bg-gray-800 rounded-t-lg p-2 flex items-center">
+                <div className="bg-gray-800 rounded-t-lg p-2 flex items-center"> {/* Decorative terminal header */}
                   <div className="flex gap-1">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -325,15 +331,19 @@ const FeatureBoxes = () => {
                   <div className="mx-auto text-white text-xs">Personal Values</div>
                 </div>
                 <div className="p-4 bg-gray-50 rounded-b-lg overflow-y-auto max-h-52 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                  <h4 className="font-medium text-gray-900 mb-3 text-sm">My Values & Mission</h4>
-                  <div className="space-y-3">
-                    {resume.personalValues.map((value, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                        <p className="text-sm text-gray-700">{value}</p>
-                      </div>
-                    ))}
-                  </div>
+                  {resume.personalValues && resume.personalValues.length > 0 && (
+                    <>
+                        <h4 className="font-medium text-gray-900 mb-3 text-sm">My Values & Mission</h4>
+                        <div className="space-y-3">
+                        {resume.personalValues.map((value, index) => (
+                            <div key={index} className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                            <p className="text-sm text-gray-700">{value}</p>
+                            </div>
+                        ))}
+                        </div>
+                    </>
+                  )}
                   {resume.mission && (
                     <div className="mt-4 pt-3 border-t border-gray-200">
                       <h5 className="font-medium text-gray-900 mb-2 text-sm">Mission Statement</h5>
@@ -345,7 +355,7 @@ const FeatureBoxes = () => {
             </div>
           </motion.div>
 
-          {/* Contact Me Card - Light Blue - Already has clickable elements */}
+          {/* Contact Me Card */}
           <motion.div
             variants={item}
             className="group relative overflow-hidden rounded-3xl bg-blue-200 p-8 text-right text-gray-800 h-full flex flex-col cursor-pointer transition-all duration-300"
@@ -375,22 +385,23 @@ const FeatureBoxes = () => {
                   <span className="text-sm bg-white bg-opacity-30 px-3 py-1 rounded-full text-gray-700">Click to explore →</span>
                 </div>
               </div>
-              
+
               <div className="mt-6 w-full bg-white rounded-lg p-4">
                 <div className="text-center mb-4">
                   <h4 className="font-medium text-gray-900 mb-2">{resume.name}</h4>
                   <p className="text-sm text-gray-600 mb-2">{resume.title}</p>
                   <p className="text-xs text-gray-500 mb-4">{resume.location}</p>
-                  
+
                   <div className="flex justify-center items-center gap-3 mt-4 flex-wrap">
-                    {socials.map((social: Social) => {
-                      const iconDetails = socialIconMap[social.icon.toLowerCase()] || socialIconMap.default;
-                      const isMailLink = social.url.startsWith('mailto:');
-                      const isWhatsAppLink = social.url.startsWith('https://wa.me/');
+                    {Object.entries(socials).map(([platformKey, socialData]: [string, Social]) => {
+                      // Use socialData.icon (which is the key for socialIconMap)
+                      const iconDetails = socialIconMap[socialData.icon] || socialIconMap.default;
+                      const isMailLink = socialData.url.startsWith('mailto:');
+                      const isWhatsAppLink = socialData.url.startsWith('https://wa.me/');
                       return (
                         <a
-                          key={social.platform}
-                          href={social.url}
+                          key={platformKey} // Use the platform key from Object.entries
+                          href={socialData.url}
                           target={!isMailLink && !isWhatsAppLink ? "_blank" : "_self"}
                           rel={!isMailLink && !isWhatsAppLink ? "noopener noreferrer" : ""}
                           aria-label={`Contact ${resume.name} via ${iconDetails.name}`}
@@ -404,11 +415,11 @@ const FeatureBoxes = () => {
                     })}
                   </div>
                 </div>
-                
-                {socials.find(s => s.icon.toLowerCase() === 'bookly') && (
+
+                {socials.bookly && ( // Direct check for 'bookly' key in socials object
                   <div className="mt-6">
-                    <a 
-                      href={socials.find(s => s.icon.toLowerCase() === 'bookly')?.url}
+                    <a
+                      href={socials.bookly.url} // Direct access to URL
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block bg-blue-500 text-white text-sm font-medium py-3 px-4 rounded-lg text-center hover:bg-blue-600 transition-colors cursor-pointer"

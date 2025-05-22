@@ -35,11 +35,9 @@ export default function RootLayout({
       >
         <MouseEffect />
         <Navbar />
-        <div className="relative flex-1">
-          <main className="relative z-10">
-            {children}
-          </main>
-        </div>
+        <main className="flex-grow">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

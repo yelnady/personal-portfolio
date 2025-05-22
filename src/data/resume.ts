@@ -37,11 +37,9 @@ export interface Resume {
   experience: Experience[];
   mission?: string;
   skills: string[];
-  linkedin?: string;
-  github?: string;
-  twitter?: string;
-  instagram?: string;
-
+  technologies?: string[];
+  mlOps?: string[];
+  sideHustle?: string[];
 }
 
 export const resume: Resume = {
@@ -180,8 +178,15 @@ When I'm not coding, I enjoy teaching and mentoring others, contributing to open
   ],
 
   skills: ["Python", "AI/ML", "Fine‑Tuning & Distillation", "Infrastructure", "MLOps", "Generative AI & LLMs", "Agentic AI",
-    "LangChain", "Prompt Engineering", "NLP", "PyTorch/TensorFlow", "scikit‑learn", "n8n", 
-    "Git & Code Review", "Docker & Kubernetes", "Azure/AWS/GCP", "SQL & NoSQL", "REST/FastAPI", "Stakeholder Engagement", "Automation Workflows",
-    "Communication", "Statistical Analysis", "AI Web Apps", "Web Scraping", "Deep Neural Networks",
-    "Data Visualization", "Problem-solving", "Self-learning", "Data Mining", "Classification and Clustering Algorithms", "Data Analysis"]
+    "LangChain", "Prompt Engineering", "NLP", "PyTorch/TensorFlow", "scikit‑learn", "n8n",
+    "Git & Code Review", "Docker & Kubernetes", "Azure/AWS/GCP", "SQL & NoSQL", "REST/FastAPI", "Automation Workflows","Traditional Machine Learning",
+    "Communication", "Statistical Analysis", "AI Web Apps", "Web Scraping", "Deep Neural Networks", "Transformers", "Diffusion Models",
+    "Data Visualization", "Problem-solving", "Self-learning", "Stakeholder Engagement", ]
+  ,
+
+  technologies: ["Python", "SQL", "Node.js", "JavaScript (Next.js)", "PyTorch", "TensorFlow", "LangChain/LangGraph", "Transformers", "FAISS"
+  ],
+  mlOps: ["Git", "Docker", "MLflow", "Azure ML", "Weights & Biases (W&B)", "FastAPI", "AWS SageMaker", "Embedding Management"]
+
+, sideHustle: ["Flutter", "Mobile Apps", "Framer", ""]
 };
